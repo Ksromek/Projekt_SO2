@@ -1,0 +1,69 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Projekt",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Projekt1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Projekt1-Debug-4a3a374e1ba84ff4e579.json",
+					"name" : "Projekt1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Projekt2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Projekt2-Debug-670a086edbe2bb3a1d7e.json",
+					"name" : "Projekt2",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/cmake-build-debug",
+		"source" : "C:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

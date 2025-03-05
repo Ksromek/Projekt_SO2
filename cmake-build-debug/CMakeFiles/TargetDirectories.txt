@@ -1,0 +1,4 @@
+C:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/cmake-build-debug/CMakeFiles/Projekt1.dir
+C:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/cmake-build-debug/CMakeFiles/Projekt2.dir
+C:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/cmake-build-debug/CMakeFiles/rebuild_cache.dir

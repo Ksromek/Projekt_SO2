@@ -1,11 +1,11 @@
 # Projekt 1:
 ## Instrukcja uruchomienia projektu:
 ## Opis problemu:
-Problem ucztujących filozofów (Dining Philosophers Problem) to klasyczny problem synchronizacji współbieżnych procesów, opisany przez Edsgera Dijkstrę w 1965 roku. Służy jako przykład problemu alokacji zasobów oraz synchronizacji wielu procesów lub wątków w systemach operacyjnych i programowaniu współbieżnym.
+Problem jedzących filozofów (Dining Philosophers Problem) to klasyczny problem synchronizacji współbieżnych procesów, opisany przez Edsgera Dijkstrę w 1965 roku. Służy jako przykład problemu alokacji zasobów oraz synchronizacji wielu procesów lub wątków w systemach operacyjnych i programowaniu współbieżnym.
 ### Opis sytuacji problemowej:
-Pięciu filozofów siedzi przy okrągłym stole, a pomiędzy nimi znajduje się pięć widelców. Każdy filozof ma dostęp do dwóch sąsiadujących widelców, które są mu niezbędne do jedzenia. Filozofowie wykonują cyklicznie dwie czynności:
-1. Myślą – nie korzystają z widelców.
-2. Jedzą – wymagają dwóch widelców jednocześnie.
+Pięciu filozofów siedzi przy okrągłym stole, a pomiędzy nimi znajduje się pięć widelców. Każdy filozof ma dostęp do dwóch widelców, które są mu niezbędne do jedzenia. Filozofowie wykonują cyklicznie dwie czynności:
+1. **Myślą** – nie korzystają z widelców.
+2. **Jedzą** – korzystają z dwóch widelców jednocześnie.
 
 Każdy filozof może podnieść tylko jeden widelec naraz. Jeśli drugi widelec jest zajęty przez sąsiada, filozof musi czekać, aż stanie się dostępny.
 ### Główne problemy do rozwiązania:

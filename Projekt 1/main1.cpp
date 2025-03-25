@@ -1,3 +1,9 @@
+// Colors for better console readability
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define CYAN    "\033[36m"
+#define RESET   "\033[0m"
+
 #include <iostream>
 #include <thread>
 #include <vector>
@@ -31,7 +37,7 @@ void philosopher(int id) {
         stringstream log;
 
         // Thinking
-        log << "Philosopher " << id << " is thinking...\n";
+        log <<CYAN<< "Philosopher " << id << " is thinking...\n"<<RESET;
         this_thread::sleep_for(chrono::milliseconds(1000));
 
         // Picking up forks
@@ -39,14 +45,14 @@ void philosopher(int id) {
         wait(forks[right_fork]);
 
         // Eating
-        log << "Philosopher " << id << " is eating...\n";
+        log <<GREEN<< "Philosopher " << id << " is eating...\n"<<RESET;
         this_thread::sleep_for(chrono::milliseconds(1000));
 
         // Putting down forks
         signal(forks[left_fork]);
         signal(forks[right_fork]);
 
-        log << "Philosopher " << id << " put down forks and is thinking...\n";
+        log <<RED<< "Philosopher " << id << " put down forks and is thinking...\n"<<RESET;
 
         cout << log.str();
     }

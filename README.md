@@ -1,5 +1,6 @@
 # Projekt 1:
 ## Instrukcja uruchomienia projektu:
+Należy uruchomić plik wykonywalny Projekt1.exe, program zapyta o liczbę filozofów, którą należy podać w konsoli oraz zatwierdzić ENTEREM. Program uruchomi się, a następnie zacznie pracować w nieskończonej pętli.
 ## Opis problemu:
 Problem jedzących filozofów (Dining Philosophers Problem) to klasyczny problem synchronizacji współbieżnych procesów, opisany przez Edsgera Dijkstrę w 1965 roku. Służy jako przykład problemu alokacji zasobów oraz synchronizacji wielu procesów lub wątków w systemach operacyjnych i programowaniu współbieżnym.
 ### Opis sytuacji problemowej:

@@ -30,6 +30,15 @@ Należy sterować synchronizacją dostępu do zasobów (widelców) w taki sposó
 - Mechanizm semaforów binarnych (implementowany jako zmienne ` forks[i] ` kontrolowane przez ` wait() ` i ` signal() `).
 - Zasada asymetrii – ostatni filozof podnosi najpierw prawy widelec, a następnie lewy, co zapobiega zakleszczeniu.
 
+# Projekt 2:
+## Instrukcja uruchomienia projektu:
+## Opis problemu:
+### Opis sytuacji problemowej:
+### Główne problemy do rozwiązania:
+## Wątki:
+## Sekcje krytyczne i ich rozwiązania:
+### Sekcje krytyczne:
+### Rozwiązanie problemu sekcji krytycznej:
 
 
 

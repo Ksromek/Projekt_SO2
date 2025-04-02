@@ -52,6 +52,7 @@ build cmake_object_order_depends_target_Projekt1: phony || .
 build CMakeFiles/Projekt1.dir/Projekt_1/main1.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Debug C$:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/Projekt$ 1/main1.cpp || cmake_object_order_depends_target_Projekt1
   DEP_FILE = CMakeFiles\Projekt1.dir\Projekt_1\main1.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/include
   OBJECT_DIR = CMakeFiles\Projekt1.dir
   OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir\Projekt_1
 
@@ -74,37 +75,72 @@ build Projekt1.exe: CXX_EXECUTABLE_LINKER__Projekt1_Debug CMakeFiles/Projekt1.di
   TARGET_PDB = Projekt1.exe.dbg
 
 # =============================================================================
-# Object build statements for EXECUTABLE target Projekt2
+# Object build statements for EXECUTABLE target Serwer
 
 
 #############################################
-# Order-only phony target for Projekt2
+# Order-only phony target for Serwer
 
-build cmake_object_order_depends_target_Projekt2: phony || .
+build cmake_object_order_depends_target_Serwer: phony || .
 
-build CMakeFiles/Projekt2.dir/Projekt_2/main2.cpp.obj: CXX_COMPILER__Projekt2_unscanned_Debug C$:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/Projekt$ 2/main2.cpp || cmake_object_order_depends_target_Projekt2
-  DEP_FILE = CMakeFiles\Projekt2.dir\Projekt_2\main2.cpp.obj.d
+build CMakeFiles/Serwer.dir/Projekt_2/server.cpp.obj: CXX_COMPILER__Serwer_unscanned_Debug C$:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/Projekt$ 2/server.cpp || cmake_object_order_depends_target_Serwer
+  DEP_FILE = CMakeFiles\Serwer.dir\Projekt_2\server.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\Projekt2.dir
-  OBJECT_FILE_DIR = CMakeFiles\Projekt2.dir\Projekt_2
+  INCLUDES = -IC:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/include
+  OBJECT_DIR = CMakeFiles\Serwer.dir
+  OBJECT_FILE_DIR = CMakeFiles\Serwer.dir\Projekt_2
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target Projekt2
+# Link build statements for EXECUTABLE target Serwer
 
 
 #############################################
-# Link the executable Projekt2.exe
+# Link the executable Serwer.exe
 
-build Projekt2.exe: CXX_EXECUTABLE_LINKER__Projekt2_Debug CMakeFiles/Projekt2.dir/Projekt_2/main2.cpp.obj
+build Serwer.exe: CXX_EXECUTABLE_LINKER__Serwer_Debug CMakeFiles/Serwer.dir/Projekt_2/server.cpp.obj
   FLAGS = -g
-  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\Projekt2.dir
+  LINK_LIBRARIES = -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\Serwer.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = Projekt2.exe
-  TARGET_IMPLIB = libProjekt2.dll.a
-  TARGET_PDB = Projekt2.exe.dbg
+  TARGET_FILE = Serwer.exe
+  TARGET_IMPLIB = libSerwer.dll.a
+  TARGET_PDB = Serwer.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target Klient
+
+
+#############################################
+# Order-only phony target for Klient
+
+build cmake_object_order_depends_target_Klient: phony || .
+
+build CMakeFiles/Klient.dir/Projekt_2/client.cpp.obj: CXX_COMPILER__Klient_unscanned_Debug C$:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/Projekt$ 2/client.cpp || cmake_object_order_depends_target_Klient
+  DEP_FILE = CMakeFiles\Klient.dir\Projekt_2\client.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/include
+  OBJECT_DIR = CMakeFiles\Klient.dir
+  OBJECT_FILE_DIR = CMakeFiles\Klient.dir\Projekt_2
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Klient
+
+
+#############################################
+# Link the executable Klient.exe
+
+build Klient.exe: CXX_EXECUTABLE_LINKER__Klient_Debug CMakeFiles/Klient.dir/Projekt_2/client.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\Klient.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = Klient.exe
+  TARGET_IMPLIB = libKlient.dll.a
+  TARGET_PDB = Klient.exe.dbg
 
 
 #############################################
@@ -132,9 +168,11 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
+build Klient: phony Klient.exe
+
 build Projekt1: phony Projekt1.exe
 
-build Projekt2: phony Projekt2.exe
+build Serwer: phony Serwer.exe
 
 # =============================================================================
 # Folder targets.
@@ -144,7 +182,7 @@ build Projekt2: phony Projekt2.exe
 #############################################
 # Folder: C:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/cmake-build-debug
 
-build all: phony Projekt1.exe Projekt2.exe
+build all: phony Projekt1.exe Serwer.exe Klient.exe
 
 # =============================================================================
 # Built-in targets

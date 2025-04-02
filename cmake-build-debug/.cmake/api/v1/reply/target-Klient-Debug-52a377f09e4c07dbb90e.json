@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Projekt2.exe"
+			"path" : "Klient.exe"
 		},
 		{
-			"path" : "Projekt2.pdb"
+			"path" : "Klient.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -13,7 +13,9 @@
 	{
 		"commands" : 
 		[
-			"add_executable"
+			"add_executable",
+			"target_link_libraries",
+			"include_directories"
 		],
 		"files" : 
 		[
@@ -27,7 +29,19 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 7,
+				"line" : 9,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 12,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 5,
 				"parent" : 0
 			}
 		]
@@ -39,6 +53,13 @@
 			[
 				{
 					"fragment" : "-g -std=gnu++20 -fdiagnostics-color=always"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/include"
 				}
 			],
 			"language" : "CXX",
@@ -56,7 +77,7 @@
 			]
 		}
 	],
-	"id" : "Projekt2::@6890427a1f51a3e7e1df",
+	"id" : "Klient::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -70,14 +91,19 @@
 				"role" : "flags"
 			},
 			{
+				"backtrace" : 2,
+				"fragment" : "-lws2_32",
+				"role" : "libraries"
+			},
+			{
 				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
 				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
-	"name" : "Projekt2",
-	"nameOnDisk" : "Projekt2.exe",
+	"name" : "Klient",
+	"nameOnDisk" : "Klient.exe",
 	"paths" : 
 	{
 		"build" : ".",
@@ -98,7 +124,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Projekt 2/main2.cpp",
+			"path" : "Projekt 2/client.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

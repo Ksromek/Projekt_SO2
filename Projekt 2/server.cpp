@@ -4,35 +4,54 @@
 #include <vector>
 #include <thread>
 #include <mutex>
+#include <algorithm>
 
 #pragma comment(lib, "Ws2_32.lib")
 
 constexpr int PORT = 12345;
+constexpr int BUFFER_SIZE = 1024;
+
 std::vector<SOCKET> clients;
 std::mutex clientsMutex;
 
+void broadcastMessage(const std::string& message, SOCKET sender) {
+    std::lock_guard<std::mutex> lock(clientsMutex);
+    for (SOCKET client : clients) {
+        if (client != sender) {
+            send(client, message.c_str(), message.size(), 0);
+        }
+    }
+}
+
 void handleClient(SOCKET clientSocket) {
-    char buffer[1024];
+    char buffer[BUFFER_SIZE];
 
     while (true) {
-        memset(buffer, 0, sizeof(buffer));
-        int bytesReceived = recv(clientSocket, buffer, sizeof(buffer) - 1, 0);
+        memset(buffer, 0, BUFFER_SIZE);
+        int bytesReceived = recv(clientSocket, buffer, BUFFER_SIZE - 1, 0);
 
         if (bytesReceived <= 0) {
             std::cout << "Client disconnected.\n";
-            closesocket(clientSocket);
-            return;
+            break;
         }
 
         std::string message(buffer);
         std::cout << "Received: " << message << std::endl;
 
         if (message == "exit") {
-            std::cout << "Client requested exit.\n";
-            closesocket(clientSocket);
-            return;
+            break;
         }
+
+        broadcastMessage(message, clientSocket);
     }
+
+    // Usuwanie klienta z listy
+    {
+        std::lock_guard<std::mutex> lock(clientsMutex);
+        clients.erase(std::remove(clients.begin(), clients.end(), clientSocket), clients.end());
+    }
+
+    closesocket(clientSocket);
 }
 
 int main() {
@@ -82,15 +101,13 @@ int main() {
 
         std::cout << "New client connected.\n";
 
-        // Dodanie klienta do listy
         {
             std::lock_guard<std::mutex> lock(clientsMutex);
             clients.push_back(clientSocket);
         }
 
-        // Tworzenie nowego wątku dla klienta
         std::thread clientThread(handleClient, clientSocket);
-        clientThread.detach(); // Wątek działa w tle
+        clientThread.detach();
     }
 
     closesocket(serverSocket);

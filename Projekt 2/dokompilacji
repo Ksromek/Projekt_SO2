@@ -1,0 +1,2 @@
+C:\mingw64\bin\g++ client.cpp -o client.exe -lws2_32
+C:\mingw64\bin\g++ server.cpp -o server.exe -lws2_32

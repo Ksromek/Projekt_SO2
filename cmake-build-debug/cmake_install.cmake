@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/michg/Documents/GitHub/Projekt_SO2
+# Install script for directory: C:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -52,6 +52,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "C:/Users/michg/Documents/GitHub/Projekt_SO2/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

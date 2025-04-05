@@ -4,6 +4,9 @@
 #include <vector>
 #include <thread>
 #include <mutex>
+#include <map>
+#include <fstream>
+#include <sstream>
 #include <algorithm>
 
 #pragma comment(lib, "Ws2_32.lib")
@@ -12,7 +15,15 @@ constexpr int PORT = 12345;
 constexpr int BUFFER_SIZE = 1024;
 
 std::vector<SOCKET> clients;
+std::map<SOCKET, std::string> usernames;
 std::mutex clientsMutex;
+std::mutex fileMutex;
+
+void logMessage(const std::string& message) {
+    std::lock_guard<std::mutex> lock(fileMutex);
+    std::ofstream logfile("chat_log.txt", std::ios::app);
+    logfile << message << "\n";
+}
 
 void broadcastMessage(const std::string& message, SOCKET sender) {
     std::lock_guard<std::mutex> lock(clientsMutex);
@@ -21,34 +32,90 @@ void broadcastMessage(const std::string& message, SOCKET sender) {
             send(client, message.c_str(), message.size(), 0);
         }
     }
+    logMessage(message);
 }
 
 void handleClient(SOCKET clientSocket) {
     char buffer[BUFFER_SIZE];
+
+    // Odbierz nazwę użytkownika
+    memset(buffer, 0, BUFFER_SIZE);
+    int nameLen = recv(clientSocket, buffer, BUFFER_SIZE - 1, 0);
+    std::string username = (nameLen > 0) ? std::string(buffer) : "Unknown";
+
+    {
+        std::lock_guard<std::mutex> lock(clientsMutex);
+        usernames[clientSocket] = username;
+    }
+
+    std::cout << "New client connected: " << username << "\n";
 
     while (true) {
         memset(buffer, 0, BUFFER_SIZE);
         int bytesReceived = recv(clientSocket, buffer, BUFFER_SIZE - 1, 0);
 
         if (bytesReceived <= 0) {
-            std::cout << "Client disconnected.\n";
+            std::cout << "Client disconnected: " << username << "\n";
             break;
         }
 
         std::string message(buffer);
-        std::cout << "Received: " << message << std::endl;
 
         if (message == "exit") {
             break;
         }
 
-        broadcastMessage(message, clientSocket);
+        // Komenda: /list
+        if (message.rfind("/list", 0) == 0) {
+            std::string userList = "Connected users:\n";
+            {
+                std::lock_guard<std::mutex> lock(clientsMutex);
+                for (const auto& pair : usernames) {
+                    userList += "- " + pair.second + "\n";
+                }
+            }
+            send(clientSocket, userList.c_str(), userList.length(), 0);
+            continue;
+        }
+
+        // Komenda: /private <user> <msg>
+        if (message.rfind("/private", 0) == 0) {
+            std::istringstream iss(message);
+            std::string cmd, targetUser;
+            iss >> cmd >> targetUser;
+            std::string privateMsg = message.substr(cmd.length() + targetUser.length() + 2);
+
+            SOCKET targetSocket = INVALID_SOCKET;
+            {
+                std::lock_guard<std::mutex> lock(clientsMutex);
+                for (const auto& pair : usernames) {
+                    if (pair.second == targetUser) {
+                        targetSocket = pair.first;
+                        break;
+                    }
+                }
+            }
+
+            if (targetSocket != INVALID_SOCKET) {
+                std::string formatted = "[Private from " + username + "]: " + privateMsg;
+                send(targetSocket, formatted.c_str(), formatted.length(), 0);
+                logMessage(formatted);
+            } else {
+                std::string error = "User not found.\n";
+                send(clientSocket, error.c_str(), error.length(), 0);
+            }
+            continue;
+        }
+
+        std::string fullMessage = "[" + username + "]: " + message;
+        std::cout << fullMessage << std::endl;
+        broadcastMessage(fullMessage, clientSocket);
     }
 
-    // Usuwanie klienta z listy
     {
         std::lock_guard<std::mutex> lock(clientsMutex);
         clients.erase(std::remove(clients.begin(), clients.end(), clientSocket), clients.end());
+        usernames.erase(clientSocket);
     }
 
     closesocket(clientSocket);
@@ -98,8 +165,6 @@ int main() {
             std::cerr << "Accept failed\n";
             continue;
         }
-
-        std::cout << "New client connected.\n";
 
         {
             std::lock_guard<std::mutex> lock(clientsMutex);

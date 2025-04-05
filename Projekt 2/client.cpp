@@ -22,6 +22,7 @@ void receiveMessages(SOCKET sock) {
         }
 
         std::cout << "\n[CHAT] " << buffer << std::endl;
+        std::cout << "> ";
     }
 }
 
@@ -52,6 +53,11 @@ int main() {
         WSACleanup();
         return 1;
     }
+
+    std::string username;
+    std::cout << "Enter your username: ";
+    std::getline(std::cin, username);
+    send(sock, username.c_str(), username.length(), 0);
 
     std::cout << "Connected to server. Type messages below.\n";
     std::cout << "(Type 'exit' to quit)\n";

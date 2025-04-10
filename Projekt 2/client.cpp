@@ -15,13 +15,14 @@ void receiveMessages(SOCKET sock) {
 
     while (true) {
         memset(buffer, 0, BUFFER_SIZE);
-        int bytesReceived = recv(sock, buffer, BUFFER_SIZE - 1, 0);
+        int bytesReceived = recv(sock, buffer, BUFFER_SIZE, 0);
         if (bytesReceived <= 0) {
-            std::cout << "Server disconnected.\n";
+            std::cout << "\n[INFO] Server disconnected.\n";
             break;
         }
 
-        std::cout << "\n[CHAT] " << buffer << std::endl;
+        std::string msg(buffer, bytesReceived);
+        std::cout << "\n[CHAT] " << msg << std::endl;
         std::cout << "> ";
     }
 }
@@ -59,8 +60,7 @@ int main() {
     std::getline(std::cin, username);
     send(sock, username.c_str(), username.length(), 0);
 
-    std::cout << "Connected to server. Type messages below.\n";
-    std::cout << "(Type 'exit' to quit)\n";
+    std::cout << "Connected to server. Type messages below.\n(Type 'exit' to quit)\n";
 
     std::thread receiveThread(receiveMessages, sock);
     receiveThread.detach();

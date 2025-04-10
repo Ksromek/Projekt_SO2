@@ -21,6 +21,11 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
+			"path" : "C:/Program Files/JetBrains/CLion 2024.3.4/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeMinGWFindMake.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
 			"path" : "C:/Program Files/JetBrains/CLion 2024.3.4/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake"
 		},
 		{
@@ -817,8 +822,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt/cmake-build-debug",
-		"source" : "C:/Users/Kamil/Desktop/6sem/SO2/Projekt/Projekt"
+		"build" : "C:/Users/michg/Documents/GitHub/Projekt_SO2/cmake-build-debug",
+		"source" : "C:/Users/michg/Documents/GitHub/Projekt_SO2"
 	},
 	"version" : 
 	{

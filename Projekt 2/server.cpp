@@ -27,9 +27,10 @@ void logMessage(const std::string& message) {
 
 void broadcastMessage(const std::string& message, SOCKET sender) {
     std::lock_guard<std::mutex> lock(clientsMutex);
+    std::string msgWithNewline = message + "\n";
     for (SOCKET client : clients) {
         if (client != sender) {
-            send(client, message.c_str(), message.size(), 0);
+            send(client, msgWithNewline.c_str(), msgWithNewline.size(), 0);
         }
     }
     logMessage(message);
@@ -38,10 +39,9 @@ void broadcastMessage(const std::string& message, SOCKET sender) {
 void handleClient(SOCKET clientSocket) {
     char buffer[BUFFER_SIZE];
 
-    // Odbierz nazwę użytkownika
     memset(buffer, 0, BUFFER_SIZE);
     int nameLen = recv(clientSocket, buffer, BUFFER_SIZE - 1, 0);
-    std::string username = (nameLen > 0) ? std::string(buffer) : "Unknown";
+    std::string username = (nameLen > 0) ? std::string(buffer, nameLen) : "Unknown";
 
     {
         std::lock_guard<std::mutex> lock(clientsMutex);
@@ -49,6 +49,25 @@ void handleClient(SOCKET clientSocket) {
     }
 
     std::cout << "New client connected: " << username << "\n";
+
+    // Wyślij historię czatu nowemu klientowi
+    {
+        std::lock_guard<std::mutex> lock(fileMutex);
+        std::ifstream logfile("chat_log.txt");
+        if (logfile.is_open()) {
+            std::string line;
+            std::string historyHeader = "--- Chat history ---\n";
+            send(clientSocket, historyHeader.c_str(), historyHeader.size(), 0);
+
+            while (std::getline(logfile, line)) {
+                std::string msgWithNewline = line + "\n";
+                send(clientSocket, msgWithNewline.c_str(), msgWithNewline.size(), 0);
+            }
+
+            std::string historyEnd = "--- End of history ---\n";
+            send(clientSocket, historyEnd.c_str(), historyEnd.size(), 0);
+        }
+    }
 
     while (true) {
         memset(buffer, 0, BUFFER_SIZE);
@@ -59,13 +78,12 @@ void handleClient(SOCKET clientSocket) {
             break;
         }
 
-        std::string message(buffer);
+        std::string message(buffer, bytesReceived);
 
         if (message == "exit") {
             break;
         }
 
-        // Komenda: /list
         if (message.rfind("/list", 0) == 0) {
             std::string userList = "Connected users:\n";
             {
@@ -78,7 +96,6 @@ void handleClient(SOCKET clientSocket) {
             continue;
         }
 
-        // Komenda: /private <user> <msg>
         if (message.rfind("/private", 0) == 0) {
             std::istringstream iss(message);
             std::string cmd, targetUser;
@@ -97,7 +114,7 @@ void handleClient(SOCKET clientSocket) {
             }
 
             if (targetSocket != INVALID_SOCKET) {
-                std::string formatted = "[Private from " + username + "]: " + privateMsg;
+                std::string formatted = "[Private from " + username + "]: " + privateMsg + "\n";
                 send(targetSocket, formatted.c_str(), formatted.length(), 0);
                 logMessage(formatted);
             } else {

@@ -9,7 +9,7 @@
 					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.30"
+						"string" : "3.28.6"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -43,21 +43,21 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Klient::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Klient-Debug-5586fa6bf4f637dfe823.json",
+					"jsonFile" : "target-Klient-Debug-8ed70985d6aed78fb136.json",
 					"name" : "Klient",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "Projekt1::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Projekt1-Debug-1d09bb2fdee1bab53ad7.json",
+					"jsonFile" : "target-Projekt1-Debug-59fbf58fefe1f3b32229.json",
 					"name" : "Projekt1",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "Serwer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Serwer-Debug-e21b1bfb8877e095bb17.json",
+					"jsonFile" : "target-Serwer-Debug-b7c2c5bfe6f67f2c035a.json",
 					"name" : "Serwer",
 					"projectIndex" : 0
 				}
@@ -67,12 +67,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/michg/Documents/GitHub/Projekt_SO2/cmake-build-debug",
-		"source" : "C:/Users/michg/Documents/GitHub/Projekt_SO2"
+		"build" : "C:/Users/Kamil/Desktop/Projekt_SO2/cmake-build-debug",
+		"source" : "C:/Users/Kamil/Desktop/Projekt_SO2"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 7
+		"minor" : 6
 	}
 }

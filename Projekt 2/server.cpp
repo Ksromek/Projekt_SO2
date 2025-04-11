@@ -50,7 +50,7 @@ void handleClient(SOCKET clientSocket) {
 
     std::cout << "New client connected: " << username << "\n";
 
-    // Wyślij historię czatu nowemu klientowi
+    // Send chat history to the new client
     {
         std::lock_guard<std::mutex> lock(fileMutex);
         std::ifstream logfile("chat_log.txt");

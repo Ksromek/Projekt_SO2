@@ -1,5 +1,5 @@
-C:/Users/michg/Documents/GitHub/Projekt_SO2/cmake-build-debug/CMakeFiles/Projekt1.dir
-C:/Users/michg/Documents/GitHub/Projekt_SO2/cmake-build-debug/CMakeFiles/Serwer.dir
-C:/Users/michg/Documents/GitHub/Projekt_SO2/cmake-build-debug/CMakeFiles/Klient.dir
-C:/Users/michg/Documents/GitHub/Projekt_SO2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/michg/Documents/GitHub/Projekt_SO2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Kamil/Desktop/Projekt_SO2/cmake-build-debug/CMakeFiles/Projekt1.dir
+C:/Users/Kamil/Desktop/Projekt_SO2/cmake-build-debug/CMakeFiles/Serwer.dir
+C:/Users/Kamil/Desktop/Projekt_SO2/cmake-build-debug/CMakeFiles/Klient.dir
+C:/Users/Kamil/Desktop/Projekt_SO2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Kamil/Desktop/Projekt_SO2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

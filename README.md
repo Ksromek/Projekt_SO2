@@ -32,17 +32,56 @@ Należy sterować synchronizacją dostępu do zasobów (widelców) w taki sposó
 
 # Projekt 2:
 ## Instrukcja uruchomienia projektu:
+Najpierw należy uruchomić serwer (server.exe), który będzie nasłuchiwał połączeń na porcie 12345. Następnie można uruchomić dowolną liczbę klientów (client.exe), podając przy starcie nazwę użytkownika. Programy komunikują się za pomocą gniazd TCP (IPv4, lokalnie – 127.0.0.1 lub przez sieć LAN).
 ## Opis problemu:
+Aplikacje czatowe muszą obsługiwać jednoczesnych użytkowników i zapewniać im bezpieczną oraz płynną komunikację w czasie rzeczywistym. Projekt rozwiązuje problem podstawowej komunikacji tekstowej pomiędzy wieloma klientami za pośrednictwem jednego serwera.
+Klienci mogą wymieniać się wiadomościami globalnie (wszyscy widzą) lub wysyłać prywatne wiadomości do wybranych użytkowników. Dodatkowo, po dołączeniu nowy użytkownik otrzymuje historię czatu, aby znać kontekst rozmowy.
 ### Opis sytuacji problemowej:
+Aplikacja czatu musi:
+- Obsługiwać dynamicznie dołączających i rozłączających się użytkowników.
+- Przechowywać dane o klientach (np. nazwy użytkowników) i zapewniać do nich bezpieczny dostęp.
+- Reagować na różne polecenia tekstowe użytkownika (np. `/list` , `/private`, ` exit `).
+- Zachować historię czatu i udostępniać ją nowym klientom.
+- Obsłużyć sytuację, gdy klient niespodziewanie się rozłączy. 
+
+Wszystkie te funkcje muszą być realizowane w sposób bezpieczny wielowątkowo, co wymusza użycie mechanizmów synchronizacji.
 ### Główne problemy do rozwiązania:
+1. **Obsługa wielu klientów jednocześnie:**
+- Każdy klient musi być obsługiwany w osobnym wątku serwera.
+- Wątki te muszą działać niezależnie, bez zakłócania pracy innych klientów.
+2. **Synchronizacja dostępu do zasobów współdzielonych:**
+- Lista klientów, mapa nazw użytkowników oraz plik z logami chatu muszą być chronione przed równoczesnym zapisem lub odczytem przez wiele wątków.
+3. **Realizacja funkcji czatu:**
+- Wiadomości ogólne (widoczne dla wszystkich).
+- Wiadomości prywatne (z użyciem komendy `/private`).
+- Lista aktywnych użytkowników (`/list`).
+- Historia rozmów przesyłana do nowo połączonych klientów.
+4. **Bezpieczne zakończenie sesji:**
+- Obsługa komendy `exit`.
+- Usunięcie klienta z listy połączeń i zwolnienie zasobów.
 ## Wątki:
+1. **Po stronie klienta:**
+- *Wątek główny:* obsługuje wprowadzanie wiadomości przez użytkownika.
+- *Wątek pomocniczy:* `receiveMessages()` – odbiera wiadomości od serwera w tle i wyświetla je.
+2. **Po stronie serwera:**
+- Dla każdego klienta tworzony jest nowy wątek `handleClient()`, który:
+  - Rejestruje nazwę użytkownika.
+  - Odbiera wiadomości.
+  - Obsługuje komendy `/list` i `/private`.
+  - Wysyła historię czatu po dołączeniu.
+  - Wysyła wiadomości do innych klientów (broadcast).
+- Dzięki temu każdy klient działa niezależnie i nie blokuje innych.
 ## Sekcje krytyczne i ich rozwiązania:
 ### Sekcje krytyczne:
+1. Lista połączonych klientów (`clients`) – musi być chroniona podczas dodawania/usuwania gniazd.
+2. Mapa nazw użytkowników (`usernames`) – każda zmiana lub odczyt nazwy wymaga synchronizacji.
+3. Plik `chat_log.txt` – odczytywany przez nowych klientów i zapisywany przy każdej wiadomości.
 ### Rozwiązanie problemu sekcji krytycznej:
+- `std::mutex clientsMutex`: chroni listę gniazd i mapę `usernames`.
+- `std::mutex fileMutex`: chroni dostęp do pliku logów.
+Użyto `std::lock_guard<std::mutex>` jako RAII-locka, który automatycznie odblokowuje mutex po zakończeniu zakresu.
 
-
-
-
+  
 
 
 

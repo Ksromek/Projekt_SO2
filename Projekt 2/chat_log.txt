@@ -19,3 +19,8 @@
 [kamil]: witam
 [oskar]: witam
 
+[marek]: czesc
+[Private from michal]: oddajemy to sprawko?
+
+[Private from kamil]: tak
+

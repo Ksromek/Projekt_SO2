@@ -1,4 +1,4 @@
-# Projekt 1:
+# Projekt 1 (Kamil Sromek):
 ## Instrukcja uruchomienia projektu:
 Należy uruchomić plik wykonywalny Projekt1.exe, program zapyta o liczbę filozofów, którą należy podać w konsoli oraz zatwierdzić ENTEREM. Program uruchomi się, a następnie zacznie pracować w nieskończonej pętli.
 ## Opis problemu:
@@ -30,7 +30,7 @@ Należy sterować synchronizacją dostępu do zasobów (widelców) w taki sposó
 - Mechanizm semaforów binarnych (implementowany jako zmienne ` forks[i] ` kontrolowane przez ` wait() ` i ` signal() `).
 - Zasada asymetrii – ostatni filozof podnosi najpierw prawy widelec, a następnie lewy, co zapobiega zakleszczeniu.
 
-# Projekt 2:
+# Projekt 2 (Kamil Sromek i Michał Głuszkiewicz):
 ## Instrukcja uruchomienia projektu:
 Najpierw należy uruchomić serwer (server.exe), który będzie nasłuchiwał połączeń na porcie 12345. Następnie można uruchomić dowolną liczbę klientów (client.exe), podając przy starcie nazwę użytkownika. Programy komunikują się za pomocą gniazd TCP (IPv4, lokalnie – 127.0.0.1 lub przez sieć LAN).
 ## Opis problemu:
@@ -81,8 +81,11 @@ Wszystkie te funkcje muszą być realizowane w sposób bezpieczny wielowątkowo,
 - `std::mutex fileMutex`: chroni dostęp do pliku logów.
 Użyto `std::lock_guard<std::mutex>` jako RAII-locka, który automatycznie odblokowuje mutex po zakończeniu zakresu.
 
-  
-
+## Kompilacja:
+### Serwer
+C:\mingw64\bin\g++ server.cpp -o server.exe -lws2_32
+### Client
+C:\mingw64\bin\g++ client.cpp -o client.exe -lws2_32
 
 
 
